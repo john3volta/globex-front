@@ -1,0 +1,20 @@
+@use '../utils/functions' as *;
+@use '../base/variables' as *;
+@use 'sass:string';
+
+// ===== RESPONSIVE MIXINS =====
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin responsive($property, $min, $max, $min-width: 1024, $max-width: 1920) {
+  #{$property}: responsive-clamp($min, $max, $min-width, $max-width);
+}
