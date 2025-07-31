@@ -1,0 +1,11 @@
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
+.app {
+  width: 100%;
+  max-width: rem-calc(1200);
+  @include responsive(padding-top, 24, 64);
+  @include responsive(padding-bottom, 24, 64);
+  @include responsive(padding-left, 24, 80);
+  @include responsive(padding-right, 24, 80);
+} 
