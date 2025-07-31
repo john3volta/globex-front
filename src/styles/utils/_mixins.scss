@@ -15,6 +15,6 @@
   }
 }
 
-@mixin responsive($property, $min, $max, $min-width: 1024, $max-width: 1920) {
+@mixin responsive($property, $min, $max, $min-width: 768, $max-width: 1240) {
   #{$property}: responsive-clamp($min, $max, $min-width, $max-width);
 }
