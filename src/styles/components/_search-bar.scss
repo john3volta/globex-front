@@ -1,0 +1,43 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-border;
+  border-radius: rem-calc(24);
+  transition: all 0.3s ease;
+
+  &:focus-within {
+    box-shadow: 0 6px 25px rgba($color-primary, 0.15);
+  }
+
+  &__input {
+    flex: 1;
+    margin-left: rem-calc(24);
+  }
+
+  &__button {
+    margin-right: rem-calc(12);
+    @include responsive(padding, 8, 12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &-icon {
+      @include responsive(width, 16, 24);
+      @include responsive(height, 16, 24);
+      fill: $color-primary;
+      transition: fill 0.3s ease;
+    }
+
+    &:hover {
+      .search-bar__button-icon {
+        fill: $color-text;
+      }
+    }
+  }
+} 
