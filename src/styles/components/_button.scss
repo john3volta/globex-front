@@ -1,0 +1,24 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+.btn {
+  @include responsive(padding-top, 12, 16);
+  @include responsive(padding-bottom, 12, 16);
+  @include responsive(padding-left, 24, 32);
+  @include responsive(padding-right, 24, 32);
+  background: $color-primary;
+  color: $color-light;
+  border-radius: rem-calc(12);
+  font-weight: 600;
+  transition: background 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba($color-primary, 0.8);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+} 
