@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUsers } from '../services/api';
 import Button from './Button';
+import { useSearch } from '../contexts/SearchContext';
 
 interface User {
   id: number;
@@ -14,10 +15,15 @@ interface User {
 }
 
 const UserList: React.FC = () => {
+  const { searchTerm } = useSearch();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [loadedItems, setLoadedItems] = useState(12);
+
+  useEffect(() => {
+    setLoadedItems(12);
+  }, [searchTerm]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -65,21 +71,33 @@ const UserList: React.FC = () => {
     return <div className="user-list__message user-list__message--error">Error: {error}</div>;
   }
 
-  const displayedUsers = users.slice(0, loadedItems);
-  const hasMore = loadedItems < users.length;
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.phone.includes(searchTerm)
+  );
+
+  const displayedUsers = filteredUsers.slice(0, loadedItems);
+  const hasMore = loadedItems < filteredUsers.length;
 
   return (
-    <ul className="user-list">
-      {displayedUsers.map(renderUserCard)}
-      {hasMore && (
-        <Button 
-          onClick={loadMore}
-          className="user-list__more-btn"
-        >
-          Load more
-        </Button>
+    <div>
+      {filteredUsers.length === 0 && searchTerm ? (
+        <div className="user-list__message">Nothing found</div>
+      ) : (
+        <ul className="user-list">
+          {displayedUsers.map(renderUserCard)}
+          {hasMore && (
+            <Button 
+              onClick={loadMore}
+              className="user-list__more-btn"
+            >
+              Load more
+            </Button>
+          )}
+        </ul>
       )}
-    </ul>
+    </div>
   );
 };
 

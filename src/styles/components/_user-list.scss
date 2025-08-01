@@ -5,7 +5,7 @@
   @include responsive(margin-top, 16, 32);
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   @include responsive(gap, 16, 24);
 

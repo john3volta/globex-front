@@ -9,7 +9,7 @@
   transition: all 0.3s ease;
 
   &:focus-within {
-    box-shadow: 0 6px 25px rgba($color-primary, 0.15);
+    box-shadow: 0 0 rem-calc(20) rgba($color-primary, 0.15);
   }
 
   &__input {
@@ -20,11 +20,6 @@
   &__button {
     margin-right: rem-calc(12);
     @include responsive(padding, 8, 12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
     transition: background 0.3s ease;
 
     &-icon {
