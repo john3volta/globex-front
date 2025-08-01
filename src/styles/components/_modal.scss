@@ -1,0 +1,92 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: rem-calc(20);
+  background: rgba(#BCC3D0, 0.5);
+}
+
+.modal {
+  max-width: rem-calc(500);
+  max-height: 90vh;
+  padding: rem-calc(24);
+  background: $color-light;
+  border-radius: rem-calc(16);
+  box-shadow: 0 0 rem-calc(20) rgba($color-dark, 0.1);
+
+  &__header {
+    @include responsive(margin-bottom, 16, 40);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__close {
+    &-icon {
+      @include responsive(width, 16, 20);
+      @include responsive(height, 16, 20);
+      fill: $color-dark;
+      transition: fill 0.3s ease;
+
+      &:hover {
+        fill: $color-primary;
+      }
+    }
+  }
+
+  &__content {
+    @include responsive(margin-bottom, 16, 32);
+  }
+
+  &__info {
+    @include responsive(margin-bottom, 16, 40);
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: rem-calc(14);
+    @include responsive(gap, 16, 40);
+
+    &-label {
+      flex: 0 0 30%;
+    }
+
+    &-value {
+      color: $color-text-secondary;
+      text-align: left;
+      word-break: break-word;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+      @include responsive(padding-top, 8, 26);
+      flex-direction: column;
+      gap: rem-calc(12);
+    }
+  }
+
+  @include mobile {
+    &__info {
+      flex-direction: column;
+      margin-bottom: rem-calc(8);
+      gap: rem-calc(8);
+
+      &:last-child {
+        margin-bottom: rem-calc(8);
+        padding-top: 0;
+        gap: rem-calc(8);
+      }
+    }
+  }
+}

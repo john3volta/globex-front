@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUsers } from '../services/api';
 import Button from './Button';
+import Modal from './Modal';
 import { useSearch } from '../contexts/SearchContext';
 
 interface User {
@@ -20,6 +21,8 @@ const UserList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [loadedItems, setLoadedItems] = useState(12);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setLoadedItems(12);
@@ -45,8 +48,18 @@ const UserList: React.FC = () => {
     setLoadedItems(prev => prev + 12);
   };
 
+  const handleCardClick = (user: User) => {
+    setSelectedUser(user);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedUser(null);
+  };
+
   const renderUserCard = (user: User) => (
-    <li key={user.id} className="user-card">
+    <li key={user.id} className="user-card" onClick={() => handleCardClick(user)}>
       <h2 className="user-card__name">{user.name}</h2>
       <div className="user-card__phone">
         <svg className="user-card__icon">
@@ -97,6 +110,12 @@ const UserList: React.FC = () => {
           )}
         </ul>
       )}
+      
+      <Modal 
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        user={selectedUser}
+      />
     </div>
   );
 };
