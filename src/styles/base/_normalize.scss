@@ -1,6 +1,8 @@
 @use '../utils' as *;
 @use './variables' as *;
 
+// ===== RESET =====
+
 * {
   margin: 0;
   padding: 0;
@@ -12,14 +14,10 @@
   box-sizing: border-box;
 }
 
+// ===== BASE SETUP =====
+
 html {
   scroll-behavior: smooth;
-}
-
-#root {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 }
 
 body {
@@ -33,6 +31,16 @@ body {
   font-family: $font-primary;
   background: $color-bg;
 }
+
+// ===== LAYOUT =====
+
+#root {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+// ===== ELEMENTS =====
 
 img, picture, video, canvas, svg {
   display: block;
@@ -68,11 +76,33 @@ ul, ol {
   list-style: none;
 }
 
+// ===== SCROLLBAR =====
+
+// Firefox
 * {
-  scrollbar-width: none; // Firefox
-  -ms-overflow-style: none; // IE/Edge
+  scrollbar-width: thin;
+  scrollbar-color: rgba($color-primary, 0.5) transparent;
 }
 
-*::-webkit-scrollbar {
-  display: none; // Chrome/Safari
-} 
+// Chrome/Safari
+::-webkit-scrollbar {
+  width: rem-calc(6);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba($color-primary, 0.5);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba($color-primary, 0.8);
+  }
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
