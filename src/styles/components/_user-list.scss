@@ -1,0 +1,71 @@
+@use '../base' as *;
+@use '../utils' as *;
+
+.user-list {
+  @include responsive(margin-top, 16, 32);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  @include responsive(gap, 16, 24);
+
+  &__message {
+    @include responsive(margin, 16, 32);
+    text-align: center;
+    @include responsive(font-size, 16, 32);
+    color: $color-text-secondary;
+  
+    &--error {
+      color: $color-error;
+    }
+  }
+
+  &__more-btn {
+    margin: 0 auto;
+  }
+}
+
+.user-card {
+  flex: 0 0 31%;
+  @include responsive(height, 160, 314);
+  @include responsive(padding, 16, 24);
+  box-shadow: 0 0 rem-calc(20) rgba($color-dark, 0.1);
+  border-radius: rem-calc(16);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 rem-calc(24) rgba($color-primary, 0.3);
+  }
+
+  &__name {
+    @include responsive(margin-bottom, 12, 24);
+    font-weight: 700;
+    @include responsive(font-size, 16, 24);
+    color: $color-text;
+  }
+
+  &__phone,
+  &__email {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem-calc(12);
+    @include responsive(font-size, 10, 14);
+    color: $color-text-secondary;
+  }
+
+  &__icon {
+    @include responsive(width, 16, 24);
+    @include responsive(height, 16, 24);
+    @include responsive(margin-right, 10, 14);
+    fill: $color-primary;
+  }
+
+  @include tablet {
+    flex: 0 0 48%;
+  }
+
+  @include mobile {
+    flex: 0 0 100%;
+  }
+}
